@@ -24,7 +24,7 @@ module.exports = generator.Base.extend({
     const modulePath = `src/modules/${this.name}`;
     const testPath = `test/modules/${this.name}`;
 
-    const capitalizeName = this.name.split('-').map(n => capitalizeFirstLetter(n)).join('');
+    const capitalizeName = this.name.split('-').map(n => capitalizeFirstLetter(n)).join(' ');
 
     this.fs.copyTpl(
       this.templatePath('index.js'),
@@ -49,10 +49,10 @@ module.exports = generator.Base.extend({
     // test
     this.fs.copyTpl(
       this.templatePath('reducer-test.js'),
-      this.destinationPath(`${testPath}/reducer-test.js`, {
+      this.destinationPath(`${testPath}/reducer-test.js`), {
         moduleName: this.name,
         name: capitalizeName
-      }));
+      });
   }
 });
 
