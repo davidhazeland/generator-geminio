@@ -46,10 +46,20 @@ const getBaseName = function(path) {
   return items[items.length - 1];
 }
 
+const getCapitalizeName = function(name, split) {
+  if (!split) split = '';
+  return name.split('-').map(n => capitalizeFirstLetter(n)).join(split);
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 module.exports = {
   read: read,
   write: write,
   getDestinationPath: getDestinationPath,
   getBaseName: getBaseName,
-  getRelativePath: getRelativePath
+  getRelativePath: getRelativePath,
+  getCapitalizeName: getCapitalizeName
 }

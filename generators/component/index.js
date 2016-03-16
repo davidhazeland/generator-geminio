@@ -1,27 +1,42 @@
 'use strict';
 let generator = require('yeoman-generator');
+let utils = require('../app/utils');
 
 module.exports = generator.Base.extend({
 
   constructor: function() {
     generator.Base.apply(this, arguments);
-    this.argument('name', { type: String, required: true });
+    this.argument('name', {
+      type: String,
+      required: true
+    });
   },
 
   writing: function() {
+    const items = this.name.split('/');
+    const component = items[1];
+    const module = items[0];
 
-    // Build options
-    let opts = {};
+    const componentCapitalizeName = utils.getCapitalizeName(component);
+    const moduleCapitalizeName = utils.getCapitalizeName(module, ' ');
 
-    if(this.options.stateless === true) {
-      opts.stateless = true;
-    }
+    const componentsPath = `src/routes/${module}/components`;
+    const componentsTestPath = `test/routes/${module}/components`;
 
-    this.composeWith('react-webpack', {
-      options: opts,
-      args: [ this.name ]
-    }, {
-      local: require.resolve('generator-react-webpack/generators/component')
-    });
+    // Copy component template
+    this.fs.copyTpl(
+      this.templatePath('component.js'),
+      this.destinationPath(`${componentsPath}/${component}.js`), {
+        name: componentCapitalizeName
+      });
+
+    this.fs.copyTpl(
+      this.templatePath('test.js'),
+      this.destinationPath(`${componentsTestPath}/${component}-test.js`), {
+        component: component,
+        componentName: componentCapitalizeName,
+        module: module,
+        moduleName: moduleCapitalizeName
+      });
   }
 });

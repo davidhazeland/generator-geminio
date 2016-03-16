@@ -5,6 +5,6 @@ import { Route } from 'react-router';
 
 import <%= containerName %> from './containers/<%= containerFileName %>';
 
-export default store => {
-  return <Route path="<%= containerFileName %>" component={<%= containerName %>}/>;
-}
+export default path => (
+  <Route path={path} component={<%= containerName %>}/>;
+);

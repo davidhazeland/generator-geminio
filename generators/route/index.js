@@ -1,7 +1,7 @@
 'use strict';
 let generator = require('yeoman-generator');
 // let walk = require('esprima-walk');
-// let utils = require('../app/utils');
+let utils = require('../app/utils');
 
 module.exports = generator.Base.extend({
 
@@ -16,7 +16,9 @@ module.exports = generator.Base.extend({
   writing: function() {
     // Copy action template
     const routePath = `src/routes/${this.name}`;
-    const capitalizeName = this.name.split('-').map(n => capitalizeFirstLetter(n)).join('');
+    const routeTestPath = `test/routes/${this.name}`;
+    const capitalizeName = utils.getCapitalizeName(this.name);
+    const moduleCapitalizeName = utils.getCapitalizeName(this.name, ' ');
 
     this.fs.copyTpl(
       this.templatePath('index.js'),
@@ -37,9 +39,14 @@ module.exports = generator.Base.extend({
       this.destinationPath(`${routePath}/components/${this.name}.js`), {
         name: capitalizeName
       });
+
+    this.fs.copyTpl(
+      this.templatePath('component-test.js'),
+      this.destinationPath(`${routeTestPath}/components/${this.name}-test.js`), {
+        component: this.name,
+        componentName: capitalizeName,
+        module: this.name,
+        moduleName: moduleCapitalizeName
+      });
   }
 });
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
