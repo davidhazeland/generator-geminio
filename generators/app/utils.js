@@ -67,6 +67,58 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+
+function createProperty(name) {
+  return {
+    'type': 'Property',
+    'key': {
+      'type': 'Identifier',
+      'name': name
+    },
+    'computed': false,
+    'value': {
+      'type': 'Identifier',
+      'name': name
+    },
+    'kind': 'init',
+    'method': false,
+    'shorthand': true
+  };
+}
+
+
+function createImport(name, path, alias) {
+  const specifier = alias ? {
+    'type': 'ImportSpecifier',
+    'id': {
+        'type': 'Identifier',
+        'name': alias
+    },
+    'name': {
+        'type': 'Identifier',
+        'name': name
+    }
+  } : {
+    'type': 'ImportDefaultSpecifier',
+    'id': {
+      'type': 'Identifier',
+      'name': name
+    }
+  };
+
+  return {
+    'type': 'ImportDeclaration',
+    'specifiers': [
+      specifier
+    ],
+    'source': {
+      'type': 'Literal',
+      'value': path
+    },
+    'importKind': 'value'
+  }
+}
+
 module.exports = {
   read: read,
   write: write,
@@ -74,5 +126,7 @@ module.exports = {
   getBaseName: getBaseName,
   getRelativePath: getRelativePath,
   getCapitalizeName: getCapitalizeName,
-  getCamelCaseName: getCamelCaseName
+  getCamelCaseName: getCamelCaseName,
+  createImport,
+  createProperty
 }
