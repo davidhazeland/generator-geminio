@@ -1,7 +1,7 @@
 'use strict';
 let generator = require('yeoman-generator');
 // let walk = require('esprima-walk');
-// let utils = require('../app/utils');
+let utils = require('../app/utils');
 
 module.exports = generator.Base.extend({
 
@@ -14,17 +14,13 @@ module.exports = generator.Base.extend({
   },
 
   writing: function() {
-    // const appPath = this.destinationPath('src/containers/App.js');
-    // const destination = utils.getDestinationPath(this.name, 'actions', 'js');
-    // const baseName = utils.getBaseName(this.name);
-    // const constantName = (baseName.split(/(?=[A-Z])/).join('_')).toUpperCase();
-    // const relativePath = utils.getRelativePath(this.name, 'actions', 'js');
-
-    // Copy action template
     const modulePath = `src/modules/${this.name}`;
-    const testPath = `test/modules/${this.name}`;
+    const moduleTestPath = `test/modules/${this.name}`;
 
-    const capitalizeName = this.name.split('-').map(n => capitalizeFirstLetter(n)).join(' ');
+    const items = this.name.split('/');
+    const length = items.length;
+
+    const module = items[length - 1];
 
     this.fs.copyTpl(
       this.templatePath('index.js'),
@@ -47,15 +43,12 @@ module.exports = generator.Base.extend({
       this.destinationPath(`${modulePath}/sagas/index.js`));
 
     // test
+    const moduleName = utils.getCapitalizeName(module);
     this.fs.copyTpl(
       this.templatePath('reducer-test.js'),
-      this.destinationPath(`${testPath}/reducer-test.js`), {
-        moduleName: this.name,
-        name: capitalizeName
+      this.destinationPath(`${moduleTestPath}/reducer-test.js`), {
+        moduleName: moduleName,
+        module: this.name
       });
   }
 });
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}

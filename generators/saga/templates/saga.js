@@ -16,7 +16,7 @@ export function* request(data) {
 
 export default function* () {
   while (true) {
-    const {parameter} = yield take(actionTypes.ACTION);
+    const {parameter} = yield take(actionTypes.<%= actionType %>);
 
     yield fork(request, parameter);
   }

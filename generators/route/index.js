@@ -19,10 +19,9 @@ module.exports = generator.Base.extend({
     const length = items.length;
 
     const route = items[length - 1];
-    const routeFolder = items.slice(0, length - 1).join('/');
 
     const routePath = `src/routes/${this.name}`;
-    const routeTestPath = `src/routes/${this.name}`;
+    const routeTestPath = `test/routes/${this.name}`;
 
     const container = route;
     const containerName = utils.getCapitalizeName(container);
@@ -55,7 +54,7 @@ module.exports = generator.Base.extend({
       component: component,
       componentName: componentName,
       routeName: routeName,
-      routeFolder: routeFolder
+      routeFolder: route
     });
   }
 });

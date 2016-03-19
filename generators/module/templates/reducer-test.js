@@ -1,10 +1,10 @@
 import test from 'tape';
-import reducer from 'modules/<%= moduleName %>';
+import reducer from 'modules/<%= module %>';
 
-test('[<%= name %> module] reducer', assert => {
+test('[<%= moduleName %> module] reducer', assert => {
   const state = Object.freeze({});
   reducer(state, {type: 'INVALID'});
 
-  assert.pass('Should not change passed state');
+  assert.pass('should not change passed state');
   assert.end();
 });

@@ -12,8 +12,7 @@ export default function (state = initialState, action) {
   /* Keep the reducer clean - do not mutate the original state. */
 
   switch (action.type) {
-    // case 'YOUR_ACTION': {
-    //   // Modify next state depending on the action and return it
+    // case actionTypes.ACTION: {
     //   return nextState;
     // } break;
 
