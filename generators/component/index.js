@@ -14,29 +14,35 @@ module.exports = generator.Base.extend({
 
   writing: function() {
     const items = this.name.split('/');
-    const component = items[1];
-    const module = items[0];
+    const length = items.length;
 
-    const componentCapitalizeName = utils.getCapitalizeName(component);
-    const moduleCapitalizeName = utils.getCapitalizeName(module, ' ');
+    const component = items[length - 1];
+    const route = items[length - 2];
+    const routeFolder = items.slice(0, length - 1).join('/');
 
-    const componentsPath = `src/routes/${module}/components`;
-    const componentsTestPath = `test/routes/${module}/components`;
+    const routePath = `src/routes/${routeFolder}`;
+    const routeTestPath = `test/routes/${routeFolder}`;
+
+    const componentsPath = `${routePath}/components`;
+    const componentsTestPath = `${routeTestPath}/components`;
+
+    const componentName = utils.getCapitalizeName(component);
 
     // Copy component template
     this.fs.copyTpl(
       this.templatePath('component.js'),
       this.destinationPath(`${componentsPath}/${component}.js`), {
-        name: componentCapitalizeName
+        componentName: componentName
       });
 
+    const routeName = utils.getCapitalizeName(route, ' ');
     this.fs.copyTpl(
       this.templatePath('test.js'),
       this.destinationPath(`${componentsTestPath}/${component}-test.js`), {
         component: component,
-        componentName: componentCapitalizeName,
-        module: module,
-        moduleName: moduleCapitalizeName
+        componentName: componentName,
+        routeName: routeName,
+        routeFolder: routeFolder
       });
   }
 });

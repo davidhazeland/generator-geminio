@@ -3,12 +3,12 @@ import React from 'react';
 import reactDom from 'react-dom/server';
 import dom from 'cheerio';
 
-import create<%= componentName %> from 'routes/<%= module %>/components/<%= component %>';
+import create<%= componentName %> from 'routes/<%= routeFolder %>/components/<%= component %>';
 
 const render = reactDom.renderToStaticMarkup;
 const <%= componentName %> = create<%= componentName %>(React);
 
-test('[<%= moduleName %> route] <%= componentName %> component', assert => {
+test('[<%= routeName %> route] <%= componentName %> component', assert => {
   const el = <<%= componentName %>/>;
   const $ = dom.load(render(el));
 

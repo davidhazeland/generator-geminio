@@ -19,49 +19,43 @@ module.exports = generator.Base.extend({
     const length = items.length;
 
     const route = items[length - 1];
-    // const folderPath = items.slice(0, length - 1).join('/');
-
-    const routeName = utils.getCapitalizeName(route);
+    const routeFolder = items.slice(0, length - 1).join('/');
 
     const routePath = `src/routes/${this.name}`;
-    // const routeTestPath = `src/routes/${this.name}`;
+    const routeTestPath = `src/routes/${this.name}`;
 
     const container = route;
     const containerName = utils.getCapitalizeName(container);
 
-    this.fs.copyTpl(
-      this.templatePath('index.js'),
-      this.destinationPath(`${routePath}/index.js`), {
-        container: container,
-        containerName: containerName
-      });
+    this.fs.copyTpl(this.templatePath('index.js'), this.destinationPath(`${routePath}/index.js`), {
+      container: container,
+      containerName: containerName
+    });
 
     const component = container;
     const componentName = utils.getCapitalizeName(component);
     const title = utils.getCapitalizeName(route, ' ');
 
-    this.fs.copyTpl(
-      this.templatePath('container.js'),
-      this.destinationPath(`${routePath}/containers/${container}.js`), {
-        containerName: containerName,
-        component: component,
-        componentName: componentName,
-        title: title
-      });
+    this.fs.copyTpl(this.templatePath('container.js'),
+    this.destinationPath(`${routePath}/containers/${container}.js`), {
+      containerName: containerName,
+      component: component,
+      componentName: componentName,
+      title: title
+    });
 
-    this.fs.copyTpl(
-      this.templatePath('component.js'),
-      this.destinationPath(`${routePath}/components/${component}.js`), {
-        componentName: componentName
-      });
+    this.fs.copyTpl(this.templatePath('component.js'),
+    this.destinationPath(`${routePath}/components/${component}.js`), {
+      componentName: componentName
+    });
 
-    // this.fs.copyTpl(
-    //   this.templatePath('component-test.js'),
-    //   this.destinationPath(`${routeTestPath}/components/${this.name}-test.js`), {
-    //     component: this.name,
-    //     componentName: capitalizeName,
-    //     module: this.name,
-    //     moduleName: moduleCapitalizeName
-    //   });
+    const routeName = utils.getCapitalizeName(route, ' ');
+    this.fs.copyTpl(this.templatePath('component-test.js'),
+    this.destinationPath(`${routeTestPath}/components/${component}-test.js`), {
+      component: component,
+      componentName: componentName,
+      routeName: routeName,
+      routeFolder: routeFolder
+    });
   }
 });
