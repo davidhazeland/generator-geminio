@@ -46,9 +46,21 @@ const getBaseName = function(path) {
   return items[items.length - 1];
 }
 
+// Custom
 const getCapitalizeName = function(name, split) {
   if (!split) split = '';
   return name.split('-').map(n => capitalizeFirstLetter(n)).join(split);
+}
+
+const getCamelCaseName = function(name) {
+  return camelize(getCapitalizeName(name));
+}
+
+function camelize(str) {
+  return str.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function(match, index) {
+    if (+match === 0) return ''; // or if (/\s+/.test(match)) for white spaces
+    return index == 0 ? match.toLowerCase() : match.toUpperCase();
+  });
 }
 
 function capitalizeFirstLetter(string) {
@@ -61,5 +73,6 @@ module.exports = {
   getDestinationPath: getDestinationPath,
   getBaseName: getBaseName,
   getRelativePath: getRelativePath,
-  getCapitalizeName: getCapitalizeName
+  getCapitalizeName: getCapitalizeName,
+  getCamelCaseName: getCamelCaseName
 }

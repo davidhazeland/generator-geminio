@@ -1,15 +1,15 @@
 'use strict';
 
 export default React => {
-  const <%= name %> = (props) => {
+  const <%= componentName %> = () => {
     return (
-      <div className="<%= name %>">
+      <div className="<%= componentName %>">
 
       </div>
-    )
+    );
   };
 
-  <%= name %>.displayName = '<%= name %>';
+  <%= componentName %>.displayName = '<%= componentName %>';
 
-  return <%= name %>;
+  return <%= componentName %>;
 }

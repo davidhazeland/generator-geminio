@@ -1,8 +1,8 @@
 import test from 'tape';
 import {take, fork} from 'redux-saga';
 
-import saga, {request} from 'modules/<%= moduleName %>/sagas/<%= sagaName %>';
-import {actions, actionTypes} from 'modules/<%= moduleName %>';
+import saga, {request} from 'modules/<%= module %>/sagas/<%= sagaName %>';
+import {actions, actionTypes} from 'modules/<%= module %>';
 
 test('[<%= moduleName %> module] Saga saga', assert => {
   const sagaIterator = saga();

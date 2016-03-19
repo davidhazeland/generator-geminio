@@ -16,6 +16,7 @@ module.exports = generator.Base.extend({
     const items = this.name.split('/');
     const name = items[1];
     const module = items[0];
+    const moduleCapitalizeName = utils.getCapitalizeName(module, ' ');
 
     const sagasPath = `src/modules/${module}/sagas`;
     const sagasTestPath = `test/modules/${module}/sagas`;
@@ -27,6 +28,10 @@ module.exports = generator.Base.extend({
 
     this.fs.copyTpl(
       this.templatePath('test.js'),
-      this.destinationPath(`${sagasTestPath}/${name}-test.js`));
+      this.destinationPath(`${sagasTestPath}/${name}-test.js`), {
+        module: module,
+        moduleName: moduleCapitalizeName,
+        sagaName: name
+      });
   }
 });

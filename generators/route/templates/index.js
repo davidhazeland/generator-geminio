@@ -3,8 +3,10 @@
 import React from 'react';
 import { Route } from 'react-router';
 
-import <%= containerName %> from './containers/<%= containerFileName %>';
+import <%= containerName %> from './containers/<%= container %>';
 
 export default path => (
-  <Route path={path} component={<%= containerName %>}/>;
+  <Route path={path}>
+    <IndexRoute component={<%= containerName %>}/>
+  </Route>;
 );
