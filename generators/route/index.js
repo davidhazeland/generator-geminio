@@ -1,6 +1,6 @@
 'use strict';
 let generator = require('yeoman-generator');
-// let walk = require('esprima-walk');
+let walk = require('esprima-walk');
 let utils = require('../app/utils');
 
 module.exports = generator.Base.extend({
@@ -56,5 +56,6 @@ module.exports = generator.Base.extend({
       routeName: routeName,
       routeFolder: route
     });
+    
   }
 });

@@ -1,6 +1,6 @@
 'use strict';
 let generator = require('yeoman-generator');
-// let walk = require('esprima-walk');
+let walk = require('esprima-walk');
 let utils = require('../app/utils');
 
 module.exports = generator.Base.extend({
@@ -50,5 +50,49 @@ module.exports = generator.Base.extend({
         moduleName: moduleName,
         module: this.name
       });
+
+    attachSaga('src/sagas/index.js', `modules/${this.name}`, moduleName);
+    attachReducer('src/reducers/index.js', `modules/${this.name}`, moduleName);
   }
 });
+
+function attachSaga(sagasPath, sagaPath, sagaName) {
+  let tree = utils.read(sagasPath);
+
+  const importSaga = utils.createImport(sagaName, sagaPath, 'sagas');
+  const saga = {
+      'type': 'Identifier',
+      'name': sagaName
+  };
+
+  tree.body.unshift(importSaga);
+  walk(tree, function(node) {
+    const isDeclaration = node.type === 'VariableDeclaration' &&
+    node.declarations[0].id.name === 'sagasList';
+
+    if (isDeclaration) {
+      node.declarations[0].init.elements.unshift(saga);
+    }
+  });
+
+  utils.write(sagasPath, tree);
+}
+
+function attachReducer(reducersPath, reducerPath, reducerName) {
+  let tree = utils.read(reducersPath);
+
+  const importSaga = utils.createImport(reducerName, reducerPath);
+  const reducer = utils.createProperty(reducerName);
+
+  tree.body.unshift(importSaga);
+  walk(tree, function(node) {
+    const isDeclaration = node.type === 'VariableDeclaration' &&
+    node.declarations[0].id.name === 'reducers';
+
+    if (isDeclaration) {
+      node.declarations[0].init.properties.unshift(reducer);
+    }
+  });
+
+  utils.write(reducersPath, tree);
+}

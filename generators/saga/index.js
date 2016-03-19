@@ -1,5 +1,6 @@
 'use strict';
 let generator = require('yeoman-generator');
+let walk = require('esprima-walk');
 let utils = require('../app/utils');
 
 module.exports = generator.Base.extend({
@@ -26,23 +27,37 @@ module.exports = generator.Base.extend({
     // Copy saga template
     const sagaName = utils.getCapitalizeName(saga);
     const actionType = (sagaName.split(/(?=[A-Z])/).join('_')).toUpperCase();
-    this.fs.copyTpl(
-      this.templatePath('saga.js'),
-      this.destinationPath(`${sagasPath}/${saga}.js`), {
-        actionType: actionType
-      });
+    this.fs.copyTpl(this.templatePath('saga.js'), this.destinationPath(`${sagasPath}/${saga}.js`), {actionType: actionType});
 
     const action = utils.getCamelCaseName(saga);
     const moduleName = utils.getCapitalizeName(module);
-    this.fs.copyTpl(
-      this.templatePath('test.js'),
-      this.destinationPath(`${sagasTestPath}/${saga}-test.js`), {
-        saga: saga,
-        sagaName: sagaName,
-        moduleFolder: moduleFolder,
-        moduleName: moduleName,
-        action: action,
-        actionType: actionType
-      });
+    this.fs.copyTpl(this.templatePath('test.js'), this.destinationPath(`${sagasTestPath}/${saga}-test.js`), {
+      saga: saga,
+      sagaName: sagaName,
+      moduleFolder: moduleFolder,
+      moduleName: moduleName,
+      action: action,
+      actionType: actionType
+    });
+
+    attach(`${sagasPath}/index.js`, `./${saga}`, sagaName);
   }
 });
+
+function attach(sagasPath, sagaPath, sagaName) {
+  let tree = utils.read(sagasPath);
+
+  const importProperty = utils.createImport(sagaName, sagaPath);
+  const property = utils.createProperty(sagaName);
+
+  tree.body.unshift(importProperty);
+  walk(tree, function(node) {
+    const isExportExpression = node.type === 'ExpressionStatement' && node.expression.left.object.name === 'module' && node.expression.left.property.name === 'exports';
+
+    if (isExportExpression) {
+      node.expression.right.properties.unshift(property);
+    }
+  });
+
+  utils.write(sagasPath, tree);
+}
