@@ -36,7 +36,9 @@ module.exports = generator.Base.extend({
 
     this.fs.copyTpl(
       this.templatePath('action-types.js'),
-      this.destinationPath(`${modulePath}/action-types.js`));
+      this.destinationPath(`${modulePath}/action-types.js`), {
+        module: module
+      });
 
     this.fs.copyTpl(
       this.templatePath('sagas.js'),

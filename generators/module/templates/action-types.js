@@ -1,1 +1,1 @@
-export const ACTION = 'login/ACTION';
+export const ACTION = '<%= module %>/ACTION';
