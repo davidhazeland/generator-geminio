@@ -54,8 +54,8 @@ module.exports = generator.Base.extend({
       component: component,
       componentName: componentName,
       routeName: routeName,
-      routeFolder: route
+      routeFolder: this.name
     });
-    
+
   }
 });

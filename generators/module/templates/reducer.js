@@ -1,8 +1,7 @@
 'use strict';
 
+import freeze from 'deep-freeze';
 import * as actionTypes from './action-types';
-
-const {assign, freeze} = Object;
 
 const initialState = freeze({
 
