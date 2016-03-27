@@ -1,15 +1,13 @@
 'use strict';
 
-export default React => {
-  const <%= componentName %> = () => {
-    return (
-      <div className="<%= componentName %>">
+const <%= componentName %> = () => {
+  return (
+    <div className="<%= componentName %>">
 
-      </div>
-    );
-  };
+    </div>
+  );
+};
 
-  <%= componentName %>.displayName = '<%= componentName %>';
+<%= componentName %>.displayName = '<%= componentName %>';
 
-  return <%= componentName %>;
-}
+export default <%= componentName %>;
