@@ -5,7 +5,7 @@ import {take, fork} from 'redux-saga';
 import * as actions from '../actions';
 import * as actionTypes from '../action-types';
 
-export function* request(data) {
+export function* handle(action) {
   try {
 
   }
@@ -16,8 +16,8 @@ export function* request(data) {
 
 export default function* () {
   while (true) {
-    const {parameter} = yield take(actionTypes.<%= actionType %>);
+    const action = yield take(actionTypes.<%= actionType %>);
 
-    yield fork(request, parameter);
+    yield fork(handle, action);
   }
 }

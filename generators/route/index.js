@@ -40,7 +40,8 @@ module.exports = generator.Base.extend({
       containerName: containerName,
       component: component,
       componentName: componentName,
-      title: title
+      title: title,
+      module: this.name
     });
 
     this.fs.copyTpl(this.templatePath('component.js'),

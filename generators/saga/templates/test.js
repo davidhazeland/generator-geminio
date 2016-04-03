@@ -1,7 +1,7 @@
 import test from 'tape';
 import {take, fork} from 'redux-saga';
 
-import saga, {request} from 'modules/<%= moduleFolder %>/sagas/<%= saga %>';
+import saga, {handle} from 'modules/<%= moduleFolder %>/sagas/<%= saga %>';
 import {actions, actionTypes} from 'modules/<%= moduleFolder %>';
 
 test('[<%= moduleName %> module] <%= sagaName %> saga', assert => {
@@ -20,10 +20,10 @@ test('[<%= moduleName %> module] <%= sagaName %> saga', assert => {
     'should wait for action');
 
   actual[1] = sagaIterator.next(action).value;
-  expected[1] = fork(request, parameter);
+  expected[1] = fork(handle, action);
 
   assert.deepEqual(actual[1], expected[1],
-    'and then fork request generator');
+    'and then fork handle generator');
 
   actual[2] = sagaIterator.next().value;
   expected[2] = take(actionTypes.<%= actionType %>);

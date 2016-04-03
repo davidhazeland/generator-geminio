@@ -1,5 +1,5 @@
 import test from 'tape';
-import reducer from 'modules/<%= module %>';
+import reducer, {actions} from 'modules/<%= module %>';
 
 test('[<%= moduleName %> module] reducer', assert => {
   const state = Object.freeze({});
