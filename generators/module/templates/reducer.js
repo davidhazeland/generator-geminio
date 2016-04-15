@@ -11,9 +11,9 @@ export default function (state = initialState, action) {
   /* Keep the reducer clean - do not mutate the original state. */
 
   switch (action.type) {
-    // case actionTypes.ACTION: {
-    //   return nextState;
-    // } break;
+    case actionTypes.CLEAR: {
+      return initialState;
+    } break;
 
     default:
     {

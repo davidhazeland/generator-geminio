@@ -9,7 +9,7 @@ export function* handle(action) {
   try {
 
   }
-  catch (err) {
+  catch (error) {
 
   }
 }

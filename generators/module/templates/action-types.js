@@ -1,1 +1,1 @@
-export const ACTION = '<%= module %>/ACTION';
+export const CLEAR = '<%= module %>/CLEAR';

@@ -9,10 +9,14 @@ import { connect } from 'react-redux';
 
 import DocumentTitle from 'react-document-title';
 
-// import {actions as myActions} from 'modules/<%= module %>';
+import {actions as myActions} from 'modules/<%= module %>';
 import <%= componentName %>Component from '../components/<%= component %>';
 
 class <%= containerName %> extends Component {
+  componentWillUnmount() {
+    this.props.actions.clear();
+  }
+
   render() {
     const title = '<%= title %>';
     return (
@@ -33,7 +37,7 @@ function mapStateToProps() {
   };
 }
 function mapDispatchToProps(dispatch) {
-  const actions = Object.assign({}, {}, {
+  const actions = Object.assign({}, myActions, {
 
   });
   return { actions: bindActionCreators(actions, dispatch) };

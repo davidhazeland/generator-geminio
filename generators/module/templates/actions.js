@@ -1,8 +1,8 @@
 import * as actionTypes from './action-types';
 
-export const action = (parameter) => {
+export const clear = (parameter) => {
   return {
-    type: actionTypes.ACTION,
+    type: actionTypes.CLEAR,
     parameter
   }
 };
