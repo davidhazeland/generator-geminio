@@ -13,7 +13,7 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case actionTypes.CLEAR: {
       return initialState;
-    } break;
+    }
 
     default:
     {
