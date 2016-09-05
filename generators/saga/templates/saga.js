@@ -1,6 +1,6 @@
 'use strict';
 
-import {take, fork} from 'redux-saga';
+import {take, fork} from 'redux-saga/effects';
 
 import * as actions from '../actions';
 import * as actionTypes from '../action-types';
