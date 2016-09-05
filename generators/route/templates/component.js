@@ -10,6 +10,10 @@ const <%= componentName %> = () => {
   );
 };
 
+<%= componentName %>.propTypes = {
+
+}
+
 <%= componentName %>.displayName = '<%= componentName %>';
 
 export default <%= componentName %>;
