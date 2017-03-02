@@ -35,14 +35,14 @@ module.exports = generator.Base.extend({
         componentName: componentName
       });
 
-    const routeName = utils.getCapitalizeName(route, ' ');
-    this.fs.copyTpl(
-      this.templatePath('test.js'),
-      this.destinationPath(`${componentsTestPath}/${component}-test.js`), {
-        component: component,
-        componentName: componentName,
-        routeName: routeName,
-        routeFolder: routeFolder
-      });
+  //   const routeName = utils.getCapitalizeName(route, ' ');
+  //   this.fs.copyTpl(
+  //     this.templatePath('test.js'),
+  //     this.destinationPath(`${componentsTestPath}/${component}-test.js`), {
+  //       component: component,
+  //       componentName: componentName,
+  //       routeName: routeName,
+  //       routeFolder: routeFolder
+  //     });
   }
 });

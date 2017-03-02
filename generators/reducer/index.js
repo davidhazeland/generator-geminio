@@ -24,7 +24,7 @@ module.exports = generator.Base.extend({
     const reducerName = utils.getCamelCaseName(this.name);
     const reducerTestName = utils.getCapitalizeName(this.name);
     attach('src/modules/reducers/index.js', `./${this.name}`, reducerName);
-    attach('test/modules/reducers/index.js', `./${this.name}`, `test${reducerTestName}`);
+    // attach('test/modules/reducers/index.js', `./${this.name}`, `test${reducerTestName}`);
   }
 });
 

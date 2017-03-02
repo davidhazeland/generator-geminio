@@ -1,5 +1,3 @@
-'use strict';
-
 import React, {
   Component,
   PropTypes
@@ -9,7 +7,7 @@ import { connect } from 'react-redux';
 
 import DocumentTitle from 'react-document-title';
 
-import {actions as myActions} from 'modules/<%= module %>';
+import {actions as myActions} from 'businesses/<%= module %>';
 import <%= componentName %>Component from '../components/<%= component %>';
 
 class <%= containerName %> extends Component {

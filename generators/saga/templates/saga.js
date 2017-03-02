@@ -1,10 +1,8 @@
-'use strict';
-
 import {call, put, take, fork} from 'redux-saga/effects';
 
 import * as actions from '../actions';
 import * as actionTypes from '../action-types';
-import {actions as notificationActions} from 'auvene-modules/lib/notification';
+import {actions as notificationActions} from 'redux-businesses/lib/notification';
 
 export function* handle(action) {
   try {

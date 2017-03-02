@@ -31,14 +31,14 @@ module.exports = generator.Base.extend({
 
     const action = utils.getCamelCaseName(saga);
     const moduleName = utils.getCapitalizeName(module);
-    this.fs.copyTpl(this.templatePath('test.js'), this.destinationPath(`${sagasTestPath}/${saga}-test.js`), {
-      saga: saga,
-      sagaName: sagaName,
-      moduleFolder: moduleFolder,
-      moduleName: moduleName,
-      action: action,
-      actionType: actionType
-    });
+    // this.fs.copyTpl(this.templatePath('test.js'), this.destinationPath(`${sagasTestPath}/${saga}-test.js`), {
+    //   saga: saga,
+    //   sagaName: sagaName,
+    //   moduleFolder: moduleFolder,
+    //   moduleName: moduleName,
+    //   action: action,
+    //   actionType: actionType
+    // });
 
     attach(`${sagasPath}/index.js`, `./${saga}`, sagaName);
   }

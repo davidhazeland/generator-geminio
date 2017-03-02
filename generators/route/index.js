@@ -1,6 +1,6 @@
 'use strict';
 let generator = require('yeoman-generator');
-let walk = require('esprima-walk');
+// let walk = require('esprima-walk');
 let utils = require('../app/utils');
 
 module.exports = generator.Base.extend({
@@ -21,7 +21,7 @@ module.exports = generator.Base.extend({
     const route = items[length - 1];
 
     const routePath = `src/routes/${this.name}`;
-    const routeTestPath = `test/routes/${this.name}`;
+    // const routeTestPath = `test/routes/${this.name}`;
 
     const container = route;
     const containerName = utils.getCapitalizeName(container);
@@ -49,14 +49,14 @@ module.exports = generator.Base.extend({
       componentName: componentName
     });
 
-    const routeName = utils.getCapitalizeName(route, ' ');
-    this.fs.copyTpl(this.templatePath('component-test.js'),
-    this.destinationPath(`${routeTestPath}/components/${component}-test.js`), {
-      component: component,
-      componentName: componentName,
-      routeName: routeName,
-      routeFolder: this.name
-    });
+    // const routeName = utils.getCapitalizeName(route, ' ');
+    // this.fs.copyTpl(this.templatePath('component-test.js'),
+    // this.destinationPath(`${routeTestPath}/components/${component}-test.js`), {
+    //   component: component,
+    //   componentName: componentName,
+    //   routeName: routeName,
+    //   routeFolder: this.name
+    // });
 
   }
 });

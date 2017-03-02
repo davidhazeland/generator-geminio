@@ -14,8 +14,8 @@ module.exports = generator.Base.extend({
   },
 
   writing: function() {
-    const modulePath = `src/modules/${this.name}`;
-    const moduleTestPath = `test/modules/${this.name}`;
+    const modulePath = `src/businesses/${this.name}`;
+    const moduleTestPath = `test/businesses/${this.name}`;
 
     const items = this.name.split('/');
     const length = items.length;
@@ -44,17 +44,18 @@ module.exports = generator.Base.extend({
       this.templatePath('sagas.js'),
       this.destinationPath(`${modulePath}/sagas/index.js`));
 
-    // test
     const moduleName = utils.getCapitalizeName(module);
-    this.fs.copyTpl(
-      this.templatePath('reducer-test.js'),
-      this.destinationPath(`${moduleTestPath}/reducer-test.js`), {
-        moduleName: moduleName,
-        module: this.name
-      });
 
-    attachSaga('src/sagas/index.js', `modules/${this.name}`, moduleName);
-    attachReducer('src/reducers/index.js', `modules/${this.name}`, moduleName);
+    // test
+    // this.fs.copyTpl(
+    //   this.templatePath('reducer-test.js'),
+    //   this.destinationPath(`${moduleTestPath}/reducer-test.js`), {
+    //     moduleName: moduleName,
+    //     module: this.name
+    //   });
+
+    attachSaga('src/sagas/index.js', `businesses/${this.name}`, moduleName);
+    attachReducer('src/reducers/index.js', `businesses/${this.name}`, moduleName);
   }
 });
 
