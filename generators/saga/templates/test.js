@@ -30,7 +30,7 @@ test('[Saga] <%= sagaName %>', () => {
   expect(actual[2]).toEqual(expected[2]);
 });
 
-describe('[Saga] <%= sagaName %> - handle() generator', function() {
+describe('[Saga] <%= sagaName %> - handle() generator', () => {
   xtest('Error', () => {
     const parameter = {};
     const action = actions.<%= action %>(parameter);
