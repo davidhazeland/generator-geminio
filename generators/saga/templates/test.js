@@ -1,10 +1,11 @@
-import test from 'tape';
-import {take, fork} from 'redux-saga';
+import {call, put, take, fork} from 'redux-saga/effects';
 
-import saga, {handle} from 'modules/<%= moduleFolder %>/sagas/<%= saga %>';
-import {actions, actionTypes} from 'modules/<%= moduleFolder %>';
+import saga, {handle} from '../<%= saga %>';
+import {actions, actionTypes} from '../../index';
 
-test('[<%= moduleName %> module] <%= sagaName %> saga', assert => {
+import {actions as notificationActions} from 'redux-businesses/lib/notification';
+
+test('[Saga] <%= sagaName %>', assert => {
   const sagaIterator = saga();
 
   const actual = [];
@@ -16,20 +17,37 @@ test('[<%= moduleName %> module] <%= sagaName %> saga', assert => {
   actual[0] = sagaIterator.next().value;
   expected[0] = take(actionTypes.<%= actionType %>);
 
-  assert.deepEqual(actual[0], expected[0],
-    'should wait for action');
+  expect(actual[0]).toEqual(expected[0]);
 
   actual[1] = sagaIterator.next(action).value;
   expected[1] = fork(handle, action);
 
-  assert.deepEqual(actual[1], expected[1],
-    'and then fork handle generator');
+  expect(actual[1]).toEqual(expected[1]);
 
   actual[2] = sagaIterator.next().value;
   expected[2] = take(actionTypes.<%= actionType %>);
 
-  assert.deepEqual(actual[2], expected[2],
-    'and then continue waiting for action');
+  expect(actual[2]).toEqual(expected[2]);
+});
 
-  assert.end();
+describe('[Saga] <%= sagaName %> - handle() generator', function() {
+  xtest('Error', () => {
+    const parameter = {};
+    const action = actions.<%= action %>(parameter);
+    const sagaIterator = handle(action);
+
+    const actual = [];
+    const expected = [];
+
+    sagaIterator.next();
+
+    const error = new Error('error');
+
+    actual[0] = sagaIterator.throw(error).value;
+    expected[0] = put(notificationActions.notifyFailure({
+      message: 'error'
+    }));
+
+    expect(actual[0]).toEqual(expected[0]);
+  });
 });

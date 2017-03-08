@@ -22,7 +22,6 @@ module.exports = generator.Base.extend({
     const moduleFolder = items.slice(0, length - 1).join('/');
 
     const sagasPath = `src/businesses/${moduleFolder}/sagas`;
-    const sagasTestPath = `test/businesses/${moduleFolder}/sagas`;
 
     // Copy saga template
     const sagaName = utils.getCapitalizeName(saga);
@@ -31,14 +30,14 @@ module.exports = generator.Base.extend({
 
     const action = utils.getCamelCaseName(saga);
     const moduleName = utils.getCapitalizeName(module);
-    // this.fs.copyTpl(this.templatePath('test.js'), this.destinationPath(`${sagasTestPath}/${saga}-test.js`), {
-    //   saga: saga,
-    //   sagaName: sagaName,
-    //   moduleFolder: moduleFolder,
-    //   moduleName: moduleName,
-    //   action: action,
-    //   actionType: actionType
-    // });
+    this.fs.copyTpl(this.templatePath('test.js'), this.destinationPath(`${sagasPath}/__tests__/${saga}.js`), {
+      saga: saga,
+      sagaName: sagaName,
+      moduleFolder: moduleFolder,
+      moduleName: moduleName,
+      action: action,
+      actionType: actionType
+    });
 
     attach(`${sagasPath}/index.js`, `./${saga}`, sagaName);
   }
