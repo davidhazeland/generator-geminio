@@ -5,7 +5,7 @@ import {actions, actionTypes} from '../../index';
 
 import {actions as notificationActions} from 'redux-businesses/lib/notification';
 
-test('[Saga] <%= sagaName %>', assert => {
+test('[Saga] <%= sagaName %>', () => {
   const sagaIterator = saga();
 
   const actual = [];
