@@ -31,7 +31,7 @@ test('[Saga] <%= sagaName %>', () => {
 });
 
 describe('[Saga] <%= sagaName %> - handle() generator', () => {
-  xtest('Error', () => {
+  xtest('Exception', () => {
     const parameter = {};
     const action = actions.<%= action %>(parameter);
     const sagaIterator = handle(action);
