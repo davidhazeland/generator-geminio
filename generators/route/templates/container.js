@@ -8,11 +8,14 @@ import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title';
 
 import {actions as myActions} from 'businesses/<%= module %>';
+import {actions as notificationActions} from 'redux-businesses/lib/notification';
+
 import <%= componentName %>Component from '../components/<%= component %>';
 
 class <%= containerName %> extends Component {
   componentWillUnmount() {
     this.props.actions.clear();
+    this.props.actions.clearNotification();
   }
 
   render() {
@@ -29,13 +32,13 @@ class <%= containerName %> extends Component {
   actions: PropTypes.object.isRequired
 };
 
-function mapStateToProps() {
+function mapStateToProps({SharedNotification}) {
   return {
-
+    Notification: SharedNotification
   };
 }
 function mapDispatchToProps(dispatch) {
-  const actions = Object.assign({}, myActions, {
+  const actions = Object.assign({}, notificationActions, myActions, {
 
   });
   return { actions: bindActionCreators(actions, dispatch) };
