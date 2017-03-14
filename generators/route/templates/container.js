@@ -32,9 +32,9 @@ class <%= containerName %> extends Component {
   actions: PropTypes.object.isRequired
 };
 
-function mapStateToProps({SharedNotification}) {
+function mapStateToProps(state) {
   return {
-    Notification: SharedNotification
+    Notification: state.SharedNotification
   };
 }
 function mapDispatchToProps(dispatch) {
