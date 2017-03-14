@@ -15,7 +15,6 @@ module.exports = generator.Base.extend({
 
   writing: function() {
     const modulePath = `src/businesses/${this.name}`;
-    const moduleTestPath = `test/businesses/${this.name}`;
 
     const items = this.name.split('/');
     const length = items.length;
@@ -46,13 +45,12 @@ module.exports = generator.Base.extend({
 
     const moduleName = utils.getCapitalizeName(module);
 
-    // test
-    // this.fs.copyTpl(
-    //   this.templatePath('reducer-test.js'),
-    //   this.destinationPath(`${moduleTestPath}/reducer-test.js`), {
-    //     moduleName: moduleName,
-    //     module: this.name
-    //   });
+    this.fs.copyTpl(
+      this.templatePath('reducer-test.js'),
+      this.destinationPath(`${modulePath}/__tests__/reducer.js`), {
+        moduleName: moduleName,
+        module: this.name
+      });
 
     attachSaga('src/sagas/index.js', `businesses/${this.name}`, moduleName);
     attachReducer('src/reducers/index.js', `businesses/${this.name}`, moduleName);

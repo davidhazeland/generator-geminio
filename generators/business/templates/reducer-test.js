@@ -1,11 +1,18 @@
-import test from 'tape';
-import freeze from 'deep-freeze';
-import reducer, {actions} from 'modules/<%= module %>';
+import reducer, {initialState} from '../reducer';
+import * as actions from '../actions';
 
-test('[<%= moduleName %> module] reducer', assert => {
-  const state = freeze({});
-  reducer(state, {type: 'INVALID'});
+describe('[Reducer] <%= moduleName %>', function() {
+  test('Handle CLEAR action', () => {
+    const state = {};
+    const action = actions.clear();
+    const nextState = reducer(state, action);
 
-  assert.pass('should not change passed state');
-  assert.end();
+    let actual;
+    let expected;
+
+    actual = nextState;
+    expected = initialState;
+
+    expect(actual).toEqual(expected);
+  });
 });

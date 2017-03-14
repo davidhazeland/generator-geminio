@@ -1,7 +1,7 @@
 import freeze from 'deep-freeze';
 import * as actionTypes from './action-types';
 
-const initialState = freeze({
+export const initialState = freeze({
 
 });
 

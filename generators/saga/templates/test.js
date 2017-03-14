@@ -8,26 +8,26 @@ import {actions as notificationActions} from 'redux-businesses/lib/notification'
 test('[Saga] <%= sagaName %>', () => {
   const sagaIterator = saga();
 
-  const actual = [];
-  const expected = [];
+  let actual;
+  let expected;
 
   const parameter = {};
   const action = actions.<%= action %>(parameter);
 
-  actual[0] = sagaIterator.next().value;
-  expected[0] = take(actionTypes.<%= actionType %>);
+  actual = sagaIterator.next().value;
+  expected = take(actionTypes.<%= actionType %>);
 
-  expect(actual[0]).toEqual(expected[0]);
+  expect(actual).toEqual(expected);
 
-  actual[1] = sagaIterator.next(action).value;
-  expected[1] = fork(handle, action);
+  actual = sagaIterator.next(action).value;
+  expected = fork(handle, action);
 
-  expect(actual[1]).toEqual(expected[1]);
+  expect(actual).toEqual(expected);
 
-  actual[2] = sagaIterator.next().value;
-  expected[2] = take(actionTypes.<%= actionType %>);
+  actual = sagaIterator.next().value;
+  expected = take(actionTypes.<%= actionType %>);
 
-  expect(actual[2]).toEqual(expected[2]);
+  expect(actual).toEqual(expected);
 });
 
 describe('[Saga] <%= sagaName %> - handle() generator', () => {
@@ -36,18 +36,18 @@ describe('[Saga] <%= sagaName %> - handle() generator', () => {
     const action = actions.<%= action %>(parameter);
     const sagaIterator = handle(action);
 
-    const actual = [];
-    const expected = [];
+    let actual;
+    let expected;
 
     sagaIterator.next();
 
     const error = new Error('error');
 
-    actual[0] = sagaIterator.throw(error).value;
-    expected[0] = put(notificationActions.notifyFailure({
+    actual = sagaIterator.throw(error).value;
+    expected = put(notificationActions.notifyFailure({
       message: 'error'
     }));
 
-    expect(actual[0]).toEqual(expected[0]);
+    expect(actual).toEqual(expected);
   });
 });
