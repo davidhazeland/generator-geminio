@@ -1,18 +1,20 @@
 import reducer, {initialState} from '../reducer';
 import * as actions from '../actions';
 
-describe('[Reducer] <%= moduleName %>', function() {
-  test('Handle CLEAR action', () => {
-    const state = {};
-    const action = actions.clear();
-    const nextState = reducer(state, action);
+describe('<%= moduleName %>', function() {
+  describe('[Reducer]', function() {
+    test('Handle CLEAR action', () => {
+      const state = {};
+      const action = actions.clear();
+      const nextState = reducer(state, action);
 
-    let actual;
-    let expected;
+      let actual;
+      let expected;
 
-    actual = nextState;
-    expected = initialState;
+      actual = nextState;
+      expected = initialState;
 
-    expect(actual).toEqual(expected);
+      expect(actual).toEqual(expected);
+    });
   });
 });
