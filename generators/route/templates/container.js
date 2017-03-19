@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title';
 
 import {actions as myActions} from 'businesses/<%= module %>';
-import {actions as notificationActions} from 'redux-businesses/lib/notification';
+import {actions as notificationActions} from 'ironlake/businesses/notification';
 
 import <%= componentName %>Component from '../components/<%= component %>';
 
@@ -34,7 +34,7 @@ class <%= containerName %> extends Component {
 
 function mapStateToProps(state) {
   return {
-    Notification: state.SharedNotification
+    Notification: state.Notification
   };
 }
 function mapDispatchToProps(dispatch) {
