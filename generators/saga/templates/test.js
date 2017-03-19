@@ -3,7 +3,7 @@ import {call, put, take, fork} from 'redux-saga/effects';
 import saga, {handle} from '../<%= saga %>';
 import {actions, actionTypes} from '../../index';
 
-import {actions as notificationActions} from 'redux-businesses/lib/notification';
+import {actions as notificationActions} from 'ironlake/businesses/notification';
 
 describe('<%= moduleName %>', () => {
   test('[Saga] <%= sagaName %>', () => {
