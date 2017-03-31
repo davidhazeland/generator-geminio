@@ -45,8 +45,8 @@ describe('<%= moduleName %>', () => {
       const error = new Error('error');
 
       actual = sagaIterator.throw(error).value;
-      expected = put(notificationActions.notifyFailure({
-        message: 'error'
+      expected = put(notificationActions.notifyError({
+        text: 'error'
       }));
 
       expect(actual).toEqual(expected);

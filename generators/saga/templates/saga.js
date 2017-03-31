@@ -9,8 +9,8 @@ export function* handle(action) {
 
   }
   catch (error) {
-    yield put(notificationActions.notifyFailure({
-      message: error.message
+    yield put(notificationActions.notifyError({
+      text: error.message
     }));
   }
 }
