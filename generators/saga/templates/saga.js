@@ -1,15 +1,14 @@
 import {call, put, take, fork} from 'redux-saga/effects';
 
 import * as actions from '../actions';
-import * as actionTypes from '../action-types';
-import {actions as notificationActions} from 'ironlake/businesses/notification';
+import {actions as notifActions} from 'ironlake/businesses/notification';
 
-export function* handle(action) {
+export function* handle({payload}) {
   try {
 
   }
   catch (error) {
-    yield put(notificationActions.notifyError({
+    yield put(notifActions.notifyError({
       text: error.message
     }));
   }
@@ -17,7 +16,7 @@ export function* handle(action) {
 
 export default function* () {
   while (true) {
-    const action = yield take(actionTypes.<%= actionType %>);
+    const action = yield take(actions.<%= action %>);
 
     yield fork(handle, action);
   }

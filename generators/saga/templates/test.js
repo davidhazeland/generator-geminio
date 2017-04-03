@@ -1,9 +1,9 @@
 import {call, put, take, fork} from 'redux-saga/effects';
 
 import saga, {handle} from '../<%= saga %>';
-import {actions, actionTypes} from '../../index';
+import {actions} from '../../index';
 
-import {actions as notificationActions} from 'ironlake/businesses/notification';
+import {actions as notifActions} from 'ironlake/businesses/notification';
 
 describe('<%= moduleName %>', () => {
   test('[Saga] <%= sagaName %>', () => {
@@ -16,7 +16,7 @@ describe('<%= moduleName %>', () => {
     const action = actions.<%= action %>(parameter);
 
     actual = sagaIterator.next().value;
-    expected = take(actionTypes.<%= actionType %>);
+    expected = take(actions.<%= action %>);
 
     expect(actual).toEqual(expected);
 
@@ -26,7 +26,7 @@ describe('<%= moduleName %>', () => {
     expect(actual).toEqual(expected);
 
     actual = sagaIterator.next().value;
-    expected = take(actionTypes.<%= actionType %>);
+    expected = take(actions.<%= action %>);
 
     expect(actual).toEqual(expected);
   });
@@ -45,7 +45,7 @@ describe('<%= moduleName %>', () => {
       const error = new Error('error');
 
       actual = sagaIterator.throw(error).value;
-      expected = put(notificationActions.notifyError({
+      expected = put(notifActions.notifyError({
         text: 'error'
       }));
 

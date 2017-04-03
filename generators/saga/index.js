@@ -25,11 +25,12 @@ module.exports = generator.Base.extend({
 
     // Copy saga template
     const sagaName = utils.getCapitalizeName(saga);
-    const actionType = (sagaName.split(/(?=[A-Z])/).join('_')).toUpperCase();
-    this.fs.copyTpl(this.templatePath('saga.js'), this.destinationPath(`${sagasPath}/${saga}.js`), {actionType: actionType});
-
     const action = utils.getCamelCaseName(saga);
+    const actionType = (sagaName.split(/(?=[A-Z])/).join('_')).toUpperCase();
     const moduleName = utils.getCapitalizeName(module);
+
+    this.fs.copyTpl(this.templatePath('saga.js'), this.destinationPath(`${sagasPath}/${saga}.js`), {action: action});
+
     this.fs.copyTpl(this.templatePath('test.js'), this.destinationPath(`${sagasPath}/__tests__/${saga}.js`), {
       saga: saga,
       sagaName: sagaName,
