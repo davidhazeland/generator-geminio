@@ -1,8 +1,5 @@
-import * as actionTypes from './action-types';
+import {createAction} from 'redux-actions';
 
-export const clear = (parameter) => {
-  return {
-    type: actionTypes.CLEAR,
-    parameter
-  }
-};
+export const CLEAR = '<%= module %>/CLEAR';
+
+export const clear = createAction(CLEAR);

@@ -1,12 +1,13 @@
-import * as actionTypes from './action-types';
 import * as actions from './actions';
-import reducer from './reducer';
+import reducer, {name} from './reducer';
 import sagas from './sagas';
+import * as selectors from './selectors';
 
 export {
-  actionTypes,
+  name,
   actions,
-  sagas
+  sagas,
+  selectors
 };
 
 export default reducer;

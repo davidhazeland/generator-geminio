@@ -20,6 +20,7 @@ module.exports = generator.Base.extend({
     const length = items.length;
 
     const module = items[length - 1];
+    const moduleName = utils.getCapitalizeName(module);
 
     this.fs.copyTpl(
       this.templatePath('index.js'),
@@ -27,15 +28,13 @@ module.exports = generator.Base.extend({
 
     this.fs.copyTpl(
       this.templatePath('reducer.js'),
-      this.destinationPath(`${modulePath}/reducer.js`));
+      this.destinationPath(`${modulePath}/reducer.js`), {
+        moduleName: moduleName
+      });
 
     this.fs.copyTpl(
       this.templatePath('actions.js'),
-      this.destinationPath(`${modulePath}/actions.js`));
-
-    this.fs.copyTpl(
-      this.templatePath('action-types.js'),
-      this.destinationPath(`${modulePath}/action-types.js`), {
+      this.destinationPath(`${modulePath}/actions.js`), {
         module: module
       });
 
@@ -43,7 +42,11 @@ module.exports = generator.Base.extend({
       this.templatePath('sagas.js'),
       this.destinationPath(`${modulePath}/sagas/index.js`));
 
-    const moduleName = utils.getCapitalizeName(module);
+    this.fs.copyTpl(
+      this.templatePath('selectors.js'),
+      this.destinationPath(`${modulePath}/selectors.js`), {
+        module: module
+      });
 
     this.fs.copyTpl(
       this.templatePath('reducer-test.js'),
@@ -82,8 +85,9 @@ function attachSaga(sagasPath, sagaPath, sagaName) {
 function attachReducer(reducersPath, reducerPath, reducerName) {
   let tree = utils.read(reducersPath);
 
-  const importSaga = utils.createImport(reducerName, reducerPath);
-  const reducer = utils.createProperty(reducerName);
+  const name = `nameOf${reducerName}`;
+  const importSaga = utils.createImportWithAlias(reducerName, reducerPath, 'name', name);
+  const reducer = utils.createProperty(reducerName, name);
 
   tree.body.unshift(importSaga);
   walk(tree, function(node) {

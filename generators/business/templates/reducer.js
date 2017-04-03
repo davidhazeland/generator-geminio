@@ -1,22 +1,14 @@
 import freeze from 'deep-freeze';
-import * as actionTypes from './action-types';
+import {handleActions} from 'redux-actions';
+
+import {clear} from './actions';
+
+export const name = '<%= moduleName %>';
 
 export const initialState = freeze({
 
 });
 
-export default function (state = initialState, action) {
-  /* Keep the reducer clean - do not mutate the original state. */
-
-  switch (action.type) {
-    case actionTypes.CLEAR: {
-      return initialState;
-    }
-
-    default:
-    {
-      /* Return original state if no actions were consumed. */
-      return state;
-    }
-  }
-}
+export default handleActions({
+  [clear]: () => initialState
+}, initialState);
