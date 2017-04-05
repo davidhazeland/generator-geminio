@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 import DocumentTitle from 'react-document-title';
 
-import {actions as myActions} from 'businesses/<%= module %>';
+import {actions as myActions, selectors as mySelectors} from 'businesses/<%= module %>';
 import {actions as notifActions, selectors as notifSelectors} from 'ironlake/businesses/notification';
 
 import <%= componentName %>Component from '../components/<%= component %>';
@@ -34,6 +34,7 @@ class <%= containerName %> extends Component {
 
 function mapStateToProps(state) {
   return {
+    ...mySelectors.get(state),
     Notification: notifSelectors.get(state)
   };
 }
