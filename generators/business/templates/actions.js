@@ -1,5 +1,5 @@
-import {createAction} from 'redux-actions';
+import {createAction} from 'redux-actions'
 
-export const CLEAR = '<%= module %>/CLEAR';
+export const CLEAR = '<%= module %>/CLEAR'
 
-export const clear = createAction(CLEAR);
+export const clear = createAction(CLEAR)

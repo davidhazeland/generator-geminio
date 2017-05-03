@@ -1,3 +1,3 @@
-import {name} from './reducer';
+import {name} from './reducer'
 
-export const get = state => state[name];
+export const get = state => state[name]
