@@ -7,7 +7,7 @@ export function* handle({payload}) {
 
   }
   catch (error) {
-
+    throw error
   }
 }
 
