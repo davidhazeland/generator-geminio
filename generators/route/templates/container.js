@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 
 import DocumentTitle from 'react-document-title'
 
-import {actions as myActions, selectors as mySelectors} from 'business/<%= module %>'
+import { actions as myActions, selectors as mySelectors } from 'business/<%= module %>'
 
 import <%= componentName %>Component from '../components/<%= component %>'
 

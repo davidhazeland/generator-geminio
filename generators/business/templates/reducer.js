@@ -1,7 +1,7 @@
 import freeze from 'deep-freeze'
-import {handleActions} from 'redux-actions'
+import { handleActions } from 'redux-actions'
 
-import {clear} from './actions'
+import { clear } from './actions'
 
 export const name = '<%= moduleName %>'
 
