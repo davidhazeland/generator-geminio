@@ -17,14 +17,11 @@ module.exports = generator.Base.extend({
     const length = items.length;
 
     const component = items[length - 1];
-    const route = items[length - 2];
-    const routeFolder = items.slice(0, length - 1).join('/');
+    const businessFolder = items.slice(0, length - 1).join('/');
 
-    const routePath = `src/routes/${routeFolder}`;
-    const routeTestPath = `test/routes/${routeFolder}`;
+    const businessPath = `src/business/${businessFolder}`;
 
-    const componentsPath = `${routePath}/components`;
-    const componentsTestPath = `${routeTestPath}/components`;
+    const componentsPath = `${businessPath}/components`;
 
     const componentName = utils.getCapitalizeName(component);
 
@@ -34,15 +31,5 @@ module.exports = generator.Base.extend({
       this.destinationPath(`${componentsPath}/${component}.js`), {
         componentName: componentName
       });
-
-  //   const routeName = utils.getCapitalizeName(route, ' ');
-  //   this.fs.copyTpl(
-  //     this.templatePath('test.js'),
-  //     this.destinationPath(`${componentsTestPath}/${component}-test.js`), {
-  //       component: component,
-  //       componentName: componentName,
-  //       routeName: routeName,
-  //       routeFolder: routeFolder
-  //     });
   }
 });

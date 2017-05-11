@@ -21,7 +21,7 @@ module.exports = generator.Base.extend({
     const module = items[length - 2];
     const moduleFolder = items.slice(0, length - 1).join('/');
 
-    const sagasPath = `src/businesses/${moduleFolder}/sagas`;
+    const sagasPath = `src/business/${moduleFolder}/sagas`;
 
     // Copy saga template
     const sagaName = utils.getCapitalizeName(saga);

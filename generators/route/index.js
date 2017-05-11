@@ -1,6 +1,6 @@
 'use strict';
 let generator = require('yeoman-generator');
-// let walk = require('esprima-walk');
+let walk = require('esprima-walk');
 let utils = require('../app/utils');
 
 module.exports = generator.Base.extend({
@@ -18,25 +18,19 @@ module.exports = generator.Base.extend({
     const items = this.name.split('/');
     const length = items.length;
 
-    const route = items[length - 1];
+    const business = items[length - 1];
 
-    const routePath = `src/routes/${this.name}`;
-    // const routeTestPath = `test/routes/${this.name}`;
+    const businessPath = `src/business/${this.name}`;
 
-    const container = route;
+    const container = business;
     const containerName = utils.getCapitalizeName(container);
-
-    this.fs.copyTpl(this.templatePath('index.js'), this.destinationPath(`${routePath}/index.js`), {
-      container: container,
-      containerName: containerName
-    });
 
     const component = container;
     const componentName = utils.getCapitalizeName(component);
-    const title = utils.getCapitalizeName(route, ' ');
+    const title = utils.getCapitalizeName(business, ' ');
 
     this.fs.copyTpl(this.templatePath('container.js'),
-    this.destinationPath(`${routePath}/containers/${container}.js`), {
+    this.destinationPath(`${businessPath}/containers/${container}.js`), {
       containerName: containerName,
       component: component,
       componentName: componentName,
@@ -45,18 +39,30 @@ module.exports = generator.Base.extend({
     });
 
     this.fs.copyTpl(this.templatePath('component.js'),
-    this.destinationPath(`${routePath}/components/${component}.js`), {
+    this.destinationPath(`${businessPath}/components/${component}.js`), {
       componentName: componentName
     });
 
-    // const routeName = utils.getCapitalizeName(route, ' ');
-    // this.fs.copyTpl(this.templatePath('component-test.js'),
-    // this.destinationPath(`${routeTestPath}/components/${component}-test.js`), {
-    //   component: component,
-    //   componentName: componentName,
-    //   routeName: routeName,
-    //   routeFolder: this.name
-    // });
-
+    // attachRoute(`${businessPath}/index.js`, component);
   }
 });
+
+function attachRoute(path, component) {
+  let tree = utils.read(path);
+
+  const importSaga = utils.createImport('component', `./containers/${component}`);
+  const componentProperty = utils.createProperty('component');
+
+  tree.body.unshift(importSaga);
+  walk(tree, function(node) {
+    console.log(node);
+    // const isDeclaration = node.type === 'VariableDeclaration' &&
+    // node.declarations[0].id.name === 'sagasList';
+    //
+    // if (isDeclaration) {
+    //   node.declarations[0].init.elements.unshift(saga);
+    // }
+  });
+
+  utils.write(path, tree);
+}

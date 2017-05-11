@@ -14,7 +14,7 @@ module.exports = generator.Base.extend({
   },
 
   writing: function() {
-    const modulePath = `src/businesses/${this.name}`;
+    const modulePath = `src/business/${this.name}`;
 
     const items = this.name.split('/');
     const length = items.length;
@@ -55,8 +55,8 @@ module.exports = generator.Base.extend({
         module: this.name
       });
 
-    attachSaga('src/sagas/index.js', `businesses/${this.name}`, moduleName);
-    attachReducer('src/reducers/index.js', `businesses/${this.name}`, moduleName);
+    // attachSaga('src/sagas/index.js', `business/${this.name}`, moduleName);
+    // attachReducer('src/reducers/index.js', `business/${this.name}`, moduleName);
   }
 });
 

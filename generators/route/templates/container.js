@@ -7,15 +7,13 @@ import { connect } from 'react-redux'
 
 import DocumentTitle from 'react-document-title'
 
-import {actions as myActions, selectors as mySelectors} from 'businesses/<%= module %>'
-import {actions as notifActions, selectors as notifSelectors} from 'ironlake/businesses/notification'
+import {actions as myActions, selectors as mySelectors} from 'business/<%= module %>'
 
 import <%= componentName %>Component from '../components/<%= component %>'
 
 class <%= containerName %> extends Component {
   componentWillUnmount() {
     this.props.actions.clear()
-    this.props.actions.clearNotification()
   }
 
   render() {
@@ -34,14 +32,12 @@ class <%= containerName %> extends Component {
 
 function mapStateToProps(state) {
   return {
-    ...mySelectors.get(state),
-    Notification: notifSelectors.get(state)
+    ...mySelectors.get(state)
   }
 }
 function mapDispatchToProps(dispatch) {
   const actions = {
-    ...myActions,
-    clearNotification: notifActions.clear
+    ...myActions
   }
   return { actions: bindActionCreators(actions, dispatch) }
 }
