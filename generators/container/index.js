@@ -1,6 +1,5 @@
 'use strict';
 let generator = require('yeoman-generator');
-let walk = require('esprima-walk');
 let utils = require('../app/utils');
 
 module.exports = generator.Base.extend({
@@ -37,32 +36,5 @@ module.exports = generator.Base.extend({
       title: title,
       module: this.name
     });
-
-    this.fs.copyTpl(this.templatePath('component.js'),
-    this.destinationPath(`${businessPath}/components/${component}.js`), {
-      componentName: componentName
-    });
-
-    // attachRoute(`${businessPath}/index.js`, component);
   }
 });
-
-function attachRoute(path, component) {
-  let tree = utils.read(path);
-
-  const importSaga = utils.createImport('component', `./containers/${component}`);
-  const componentProperty = utils.createProperty('component');
-
-  tree.body.unshift(importSaga);
-  walk(tree, function(node) {
-    console.log(node);
-    // const isDeclaration = node.type === 'VariableDeclaration' &&
-    // node.declarations[0].id.name === 'sagasList';
-    //
-    // if (isDeclaration) {
-    //   node.declarations[0].init.elements.unshift(saga);
-    // }
-  });
-
-  utils.write(path, tree);
-}
